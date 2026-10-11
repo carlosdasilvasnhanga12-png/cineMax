@@ -5,24 +5,18 @@ const filmes = [
     titulo: "Big Buck Bunny",
     ano: 2008,
     genero: "Animação",
-    descricao:
-      "Uma curta-metragem de animação sobre um coelho e os animais que encontra. Vídeo de demonstração.",
-    cartaz:
-      "https://peach.blender.org/wp-content/uploads/title_anouncement.jpg",
-    video:
-      "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-    creditos:
-      "Big Buck Bunny — Blender Foundation. Confirma os termos da licença antes de redistribuir ou publicar este vídeo."
+    descricao: "Curta-metragem de animação da Blender Foundation.",
+    cartaz: "https://peach.blender.org/wp-content/uploads/title_anouncement.jpg",
+    video: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
+    creditos: "Confirma os termos da licença antes de redistribuir o vídeo."
   },
   {
     id: 2,
     titulo: "Aventura no Espaço",
     ano: 2025,
-    genero: "Aventura",
-    descricao:
-      "Título de exemplo para demonstração do catálogo. Adiciona um vídeo autorizado para o disponibilizar.",
-    cartaz:
-      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=500&q=80",
+    genero: "Ficção científica",
+    descricao: "Título de demonstração sobre uma missão espacial.",
+    cartaz: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=600&q=80",
     video: "",
     creditos: ""
   },
@@ -31,11 +25,9 @@ const filmes = [
     titulo: "O Mundo Natural",
     ano: 2025,
     genero: "Documentário",
-    descricao:
-      "Título de exemplo para um documentário. Adiciona um vídeo com autorização de publicação.",
-    cartaz:
-      "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=500&q=80",
-    video: "videos/meu-filme.mp4",
+    descricao: "Um título de demonstração dedicado à natureza.",
+    cartaz: "https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=600&q=80",
+    video: "",
     creditos: ""
   },
   {
@@ -43,10 +35,68 @@ const filmes = [
     titulo: "A Grande Expedição",
     ano: 2024,
     genero: "Aventura",
-    descricao:
-      "Título de exemplo para futuras aventuras no teu catálogo.",
-    cartaz:
-      "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=500&q=80",
+    descricao: "Uma aventura de demonstração em paisagens naturais.",
+    cartaz: "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=600&q=80",
+    video: "",
+    creditos: ""
+  },
+  {
+    id: 5,
+    titulo: "Planeta Azul",
+    ano: 2023,
+    genero: "Documentário",
+    descricao: "Título de exemplo sobre os oceanos e a vida marinha.",
+    cartaz: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=600&q=80",
+    video: "",
+    creditos: ""
+  },
+  {
+    id: 6,
+    titulo: "O Reino da Floresta",
+    ano: 2024,
+    genero: "Fantasia",
+    descricao: "Título de demonstração num mundo de fantasia.",
+    cartaz: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80",
+    video: "",
+    creditos: ""
+  },
+  {
+    id: 7,
+    titulo: "Missão Impossível",
+    ano: 2022,
+    genero: "Ação",
+    descricao: "Título fictício de demonstração para a categoria Ação.",
+    cartaz: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80",
+    video: "",
+    creditos: ""
+  },
+  {
+    id: 8,
+    titulo: "Dias de Comédia",
+    ano: 2023,
+    genero: "Comédia",
+    descricao: "Título fictício de demonstração para a categoria Comédia.",
+    cartaz: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80",
+    video: "",
+    creditos: ""
+  },
+  {
+    id: 9,
+    titulo: "O Caminho de Casa",
+    ano: 2021,
+    genero: "Drama",
+    descricao: "Título fictício de demonstração para a categoria Drama.",
+    cartaz: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=600&q=80",
+    video: "",
+    creditos: ""
+  },
+  {
+    id: 10,
+    titulo: "Heróis do Amanhã",
+    ano: 2025,
+    genero: "Aventura",
+    descricao: "Título fictício de demonstração sobre uma equipa de aventureiros.",
+    cartaz: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
     video: "",
     creditos: ""
   }
@@ -58,6 +108,7 @@ const listaFilmes = document.getElementById("lista-filmes");
 const listaFavoritos = document.getElementById("lista-favoritos");
 const semResultados = document.getElementById("sem-resultados");
 const semFavoritos = document.getElementById("sem-favoritos");
+const contadorFilmes = document.getElementById("contador-filmes");
 
 const leitor = document.getElementById("leitor");
 const video = document.getElementById("video");
@@ -66,12 +117,10 @@ const descricaoVideo = document.getElementById("descricao-video");
 const avisoVideo = document.getElementById("aviso-video");
 
 let favoritos = [];
+let categoriaAtiva = "Todos";
 
 try {
-  favoritos = JSON.parse(
-    localStorage.getItem("cinemax-favoritos") || "[]"
-  );
-
+  favoritos = JSON.parse(localStorage.getItem("cinemax-favoritos") || "[]");
   if (!Array.isArray(favoritos)) favoritos = [];
 } catch {
   favoritos = [];
@@ -89,7 +138,7 @@ function criarCartao(filme) {
 
   imagem.onerror = () => {
     imagem.removeAttribute("src");
-    imagem.alt = "Imagem indisponível";
+    imagem.alt = "Imagem indisponível para " + filme.titulo;
   };
 
   const info = document.createElement("div");
@@ -111,14 +160,12 @@ function criarCartao(filme) {
   botaoVer.addEventListener("click", () => abrirFilme(filme));
 
   const botaoFav = document.createElement("button");
-  botaoFav.className =
-    "fav" + (favoritos.includes(filme.id) ? " ativo" : "");
-  botaoFav.textContent = favoritos.includes(filme.id) ? "♥" : "♡";
-  botaoFav.setAttribute("aria-label", "Alternar favorito");
-
-  botaoFav.addEventListener("click", () => {
-    alternarFavorito(filme.id);
-  });
+  const eFavorito = favoritos.includes(filme.id);
+  botaoFav.className = "fav" + (eFavorito ? " ativo" : "");
+  botaoFav.textContent = eFavorito ? "♥" : "♡";
+  botaoFav.setAttribute("aria-label", "Alternar favorito de " + filme.titulo);
+  botaoFav.setAttribute("aria-pressed", String(eFavorito));
+  botaoFav.addEventListener("click", () => alternarFavorito(filme.id));
 
   acoes.append(botaoVer, botaoFav);
   info.append(titulo, meta, acoes);
@@ -129,50 +176,38 @@ function criarCartao(filme) {
 
 function mostrarFilmes() {
   const termo = pesquisa.value.trim().toLocaleLowerCase("pt");
-  const categoria = genero.value;
+  const categoria = categoriaAtiva;
 
   const resultados = filmes.filter(filme => {
-    const nomeCorresponde =
-      filme.titulo.toLocaleLowerCase("pt").includes(termo);
+    const texto = `${filme.titulo} ${filme.genero} ${filme.descricao}`
+      .toLocaleLowerCase("pt");
 
-    const generoCorresponde =
-      categoria === "Todos" || filme.genero === categoria;
-
-    return nomeCorresponde && generoCorresponde;
+    return texto.includes(termo) &&
+      (categoria === "Todos" || filme.genero === categoria);
   });
 
   listaFilmes.replaceChildren(...resultados.map(criarCartao));
   semResultados.hidden = resultados.length > 0;
-
+  contadorFilmes.textContent = `${resultados.length} filme(s)`;
   mostrarFavoritos();
 }
 
 function mostrarFavoritos() {
-  const selecionados = filmes.filter(filme =>
-    favoritos.includes(filme.id)
-  );
+  const selecionados = filmes.filter(filme => favoritos.includes(filme.id));
 
-  listaFavoritos.replaceChildren(
-    ...selecionados.map(criarCartao)
-  );
-
+  listaFavoritos.replaceChildren(...selecionados.map(criarCartao));
   semFavoritos.hidden = selecionados.length > 0;
 }
 
 function alternarFavorito(id) {
-  if (favoritos.includes(id)) {
-    favoritos = favoritos.filter(favoritoId => favoritoId !== id);
-  } else {
-    favoritos.push(id);
-  }
+  favoritos = favoritos.includes(id)
+    ? favoritos.filter(favoritoId => favoritoId !== id)
+    : [...favoritos, id];
 
   try {
-    localStorage.setItem(
-      "cinemax-favoritos",
-      JSON.stringify(favoritos)
-    );
+    localStorage.setItem("cinemax-favoritos", JSON.stringify(favoritos));
   } catch {
-    console.warn("Não foi possível guardar os favoritos.");
+    console.warn("Não foi possível guardar os favoritos neste navegador.");
   }
 
   mostrarFilmes();
@@ -189,11 +224,11 @@ function abrirFilme(filme) {
 
   if (filme.video) {
     video.src = filme.video;
-    avisoVideo.textContent = filme.creditos;
+    avisoVideo.textContent = filme.creditos || "";
     video.load();
   } else {
     avisoVideo.textContent =
-      "Este é um título de demonstração. Ainda não foi associado um vídeo autorizado.";
+      "Vídeo não disponível: este é um título de demonstração. Só adiciona vídeos que tens autorização para publicar.";
   }
 
   leitor.showModal();
@@ -203,11 +238,33 @@ function fecharLeitor() {
   video.pause();
   video.removeAttribute("src");
   video.load();
-  leitor.close();
+  if (leitor.open) leitor.close();
 }
 
 pesquisa.addEventListener("input", mostrarFilmes);
-genero.addEventListener("change", mostrarFilmes);
+
+genero.addEventListener("change", () => {
+  categoriaAtiva = genero.value;
+  atualizarBotoesCategoria();
+  mostrarFilmes();
+});
+
+function atualizarBotoesCategoria() {
+  document.querySelectorAll(".categoria").forEach(botao => {
+    const ativa = botao.dataset.genero === categoriaAtiva;
+    botao.classList.toggle("ativa", ativa);
+    botao.setAttribute("aria-pressed", String(ativa));
+  });
+}
+
+document.querySelectorAll(".categoria").forEach(botao => {
+  botao.addEventListener("click", () => {
+    categoriaAtiva = botao.dataset.genero;
+    genero.value = categoriaAtiva;
+    atualizarBotoesCategoria();
+    mostrarFilmes();
+  });
+});
 
 document.getElementById("fechar").addEventListener("click", fecharLeitor);
 
@@ -221,4 +278,5 @@ leitor.addEventListener("close", () => {
   video.load();
 });
 
+atualizarBotoesCategoria();
 mostrarFilmes();

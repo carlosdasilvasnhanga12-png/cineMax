@@ -4,72 +4,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b0b10">
+  <meta name="theme-color" content="#090910">
   <title>CineMax | Cinema para todos</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="topo">
-    <a class="logo" href="#inicio">Cine<span>Max</span></a>
+  <header class="topo" id="inicio">
+    <a class="logo" href="#inicio">▶ Cine<span>Max</span></a>
+
     <nav>
       <a href="#inicio">Início</a>
       <a href="#catalogo">Filmes</a>
-      <a href="#favoritos">Favoritos</a>
+      <a href="#favoritos">♡ Favoritos</a>
     </nav>
   </header>
 
   <main>
-    <section class="destaque" id="inicio">
-      <div>
-        <p class="etiqueta">O TEU CINEMA ONLINE</p>
-        <h1>O próximo filme<br>que vais adorar.</h1>
-        <p>Descobre histórias e assiste a vídeos autorizados.</p>
-        <a class="botao" href="#catalogo">Explorar catálogo</a>
+    <section class="destaque">
+      <div class="destaque-conteudo">
+        <p class="etiqueta">✦ O TEU CINEMA ONLINE</p>
+        <h1>Grandes histórias.<br>Momentos inesquecíveis.</h1>
+        <p>Explora aventuras, animações e documentários num só lugar.</p>
+        <a class="botao" href="#catalogo">▶ Explorar filmes</a>
       </div>
     </section>
 
     <section class="catalogo" id="catalogo">
-      <h2>Explorar filmes</h2>
+      <div class="titulo-secao">
+        <div>
+          <p class="etiqueta">DESCOBRE ALGO NOVO</p>
+          <h2>Explorar filmes</h2>
+        </div>
+        <span id="contador-filmes"></span>
+      </div>
 
       <div class="filtros">
         <input id="pesquisa" type="search"
-          placeholder="Pesquisar filmes..."
+          placeholder="⌕  Pesquisar filmes..."
           aria-label="Pesquisar filmes">
 
         <select id="genero" aria-label="Escolher género">
           <option value="Todos">Todos os géneros</option>
           <option value="Animação">Animação</option>
           <option value="Aventura">Aventura</option>
+          <option value="Ação">Ação</option>
+          <option value="Comédia">Comédia</option>
           <option value="Documentário">Documentário</option>
+          <option value="Drama">Drama</option>
+          <option value="Fantasia">Fantasia</option>
+          <option value="Ficção científica">Ficção científica</option>
         </select>
       </div>
 
+      <div class="categorias" aria-label="Categorias de filmes">
+        <button class="categoria ativa" data-genero="Todos">✦ Todos</button>
+        <button class="categoria" data-genero="Ação">⚡ Ação</button>
+        <button class="categoria" data-genero="Aventura">▲ Aventura</button>
+        <button class="categoria" data-genero="Animação">☺ Animação</button>
+        <button class="categoria" data-genero="Comédia">☻ Comédia</button>
+        <button class="categoria" data-genero="Documentário">❧ Documentário</button>
+        <button class="categoria" data-genero="Drama">Drama</button>
+        <button class="categoria" data-genero="Fantasia">✧ Fantasia</button>
+        <button class="categoria" data-genero="Ficção científica">✦ Ficção científica</button>
+      </div>
+
+      <div class="titulo-secao">
+        <h2>🎬 Catálogo</h2>
+      </div>
+
       <div id="lista-filmes" class="grelha"></div>
-      <p id="sem-resultados" hidden>Nenhum filme encontrado.</p>
+      <p id="sem-resultados" hidden>Nenhum filme encontrado. Experimenta outra pesquisa ou categoria.</p>
     </section>
 
     <section class="catalogo" id="favoritos">
-      <h2>♥ Os meus favoritos</h2>
+      <div class="titulo-secao">
+        <h2>♥ Os meus favoritos</h2>
+      </div>
       <div id="lista-favoritos" class="grelha"></div>
-      <p id="sem-favoritos">Ainda não tens favoritos.</p>
+      <p id="sem-favoritos">Ainda não tens favoritos. Carrega no coração de um filme para o guardar.</p>
     </section>
 
-    <section class="catalogo sobre">
-      <h2>Sobre os vídeos</h2>
-      <p>
-        O CineMax é um projeto de demonstração.
-        Os vídeos devem ser adicionados apenas quando houver
-        autorização para os disponibilizar.
-      </p>
+    <section class="sobre">
+      <p class="etiqueta">SOBRE O PROJETO</p>
+      <h2>O teu próximo filme começa aqui.</h2>
+      <p>O CineMax é um catálogo de demonstração. Os vídeos só são disponibilizados quando existe autorização para os publicar.</p>
+      <a class="botao" href="#catalogo">Descobrir filmes</a>
     </section>
   </main>
 
   <dialog id="leitor">
     <div class="leitor-topo">
       <h2 id="titulo-video">Ver filme</h2>
-      <button id="fechar" class="botao-secundario"
-        type="button">Fechar ✕</button>
+      <button id="fechar" class="botao-secundario" type="button">Fechar ✕</button>
     </div>
 
     <video id="video" controls playsinline preload="metadata">
@@ -81,6 +108,7 @@
   </dialog>
 
   <footer>
+    <a class="logo" href="#inicio">▶ Cine<span>Max</span></a>
     <p>© 2026 CineMax · Projeto de demonstração</p>
   </footer>
 </body>
